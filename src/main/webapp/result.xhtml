@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body class="main">
+        <h:outputLabel value="Hello, #{customerBean.customer.name}, here are your purchases: "/>
+        <h:dataTable value="#{customerBean.customer.chequeBooks}" var="chequeBook">
+            <h:column>
+                <f:facet name="header">Account number</f:facet>
+                #{chequeBook.accountNumber}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cheque books</f:facet>
+                <h:dataTable value="#{chequeBook.cheques}" var="cheque">
+                    <h:column>
+                        <f:facet name="header">Service type</f:facet>
+                        #{cheque.serviceType}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                        #{cheque.price}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Count</f:facet>
+                        #{cheque.count}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Cost</f:facet>
+                        #{cheque.cost}
+                    </h:column>
+                </h:dataTable>
+            </h:column>
+        </h:dataTable>
+        <h:form class="form">
+            <h:commandButton class="submit_btn" action="#{customerBean.parseXml}" value="Parse xml"/>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
